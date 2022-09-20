@@ -3,8 +3,39 @@ package AzzahJsleepFN;
 public class Jsleep
 {
   public static void main(String[] args){
+      Room test = createRoom();
+      System.out.println(test.name);
+      System.out.println(test.size);
+      System.out.println(test.price.price);
+      System.out.println(test.facility);
   }
-    public int getHotelID(){
+  
+  public static Room createRoom(){
+      Price price = new Price(200000, 15);
+      Room room = new Room("hotel", 20, price, Facility.Wifi);
+      return room;
+      
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    /*public int getHotelID(){
       return 0;
   }
   public String getHotelName(){
@@ -51,5 +82,5 @@ public class Jsleep
       return (int) totalPrice;
   }
   
-  
+  */
 }
