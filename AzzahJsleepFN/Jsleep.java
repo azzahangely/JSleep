@@ -7,7 +7,7 @@ public class Jsleep
     public int getHotelID(){
       return 0;
   }
-  public static String getHotelName(){
+  public String getHotelName(){
       return "hotel";
   }
   public boolean isDiscount(){
@@ -15,24 +15,40 @@ public class Jsleep
   }
   public float getDiscountPercentage(int beforeDiscount, int afterDiscount){
       //jika nilai before < after maka tidak dianggap tidak ada potongan harga
-      //if(beforeDiscount < afterDiscount)
+      if(beforeDiscount < afterDiscount){
           return 0;
-  }
+      }
+      float discountPrice = (float) beforeDiscount - (float) afterDiscount;
+      float discountPercentage = ((float) discountPrice/(float)beforeDiscount)* 100;
+      return (float) discountPercentage;
+      }
   public int getDiscountedPrice(int price, float discountPercentage){
-     // if(discountPercentage > 100.0f)
-    return 0;
+      if(discountPercentage > 100.0f){
+          return 0;
+      }
+      float discountedPrice = (int)price - ((int)price * (float)discountPercentage/100);
+      return (int)discountedPrice;
   }
-  public int getOriginalPrice(int discountedPrice, float discountPercentage){
-      return 0;
-  }
+  public static int getOriginalPrice(int discountedPrice, float discountPercentage){
+      if(discountedPrice == 0){
+          return 0;
+      }
+      if (discountPercentage == 100){
+      return discountedPrice;
+      }
+       float originalPrice = (float)discountedPrice * 100/(float)discountPercentage;
+       return (int) originalPrice;
+ }
   public float getAdminFeePercentage(){
       return 0.05f;
   }
   public int getAdminfee(int price){
-      return 0;
+      float adminFee = (float)(int)price * getAdminFeePercentage();
+      return (int) adminFee;
   }
   public int getTotalPrice(int price, int numberOfNight){
-      return 0;
+      int totalPrice = (int) price * (int) numberOfNight;
+      return (int) totalPrice;
   }
   
   
