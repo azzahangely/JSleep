@@ -1,8 +1,8 @@
-package AzzahJsleepFN;
+package AzzahJSleepFN;
 
 public enum Facility
 {
-    Wifi,
+    WiFi,
     Bathtub,
     Balcony,
     AC,

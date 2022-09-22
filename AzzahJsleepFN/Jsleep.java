@@ -1,86 +1,41 @@
-package AzzahJsleepFN;
+package AzzahJSleepFN;
 
-public class Jsleep
+public class JSleep
 {
   public static void main(String[] args){
+
+      Account make = createAccount();
+      System.out.println(make.name);
+      System.out.println(make.email);
+      System.out.println(make.password);
+
       Room test = createRoom();
       System.out.println(test.name);
       System.out.println(test.size);
       System.out.println(test.price.price);
       System.out.println(test.facility);
+       
+      /*Price harga = cekHarga();
+      System.out.println(promo.canApply(harga));
+      System.out.println(promo.apply(harga));
+      System.out.println(promo.canApply(harga));
+     */
   }
   
   public static Room createRoom(){
       Price price = new Price(200000, 15);
-      Room room = new Room("hotel", 20, price, Facility.Wifi);
+      Room room = new Room("hotel", 20, price, Facility.WiFi);
       return room;
-      
   }
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    /*public int getHotelID(){
-      return 0;
-  }
-  public String getHotelName(){
-      return "hotel";
-  }
-  public boolean isDiscount(){
-      return true;
-  }
-  public float getDiscountPercentage(int beforeDiscount, int afterDiscount){
-      //jika nilai before < after maka tidak dianggap tidak ada potongan harga
-      if(beforeDiscount < afterDiscount){
-          return 0;
-      }
-      float discountPrice = (float) beforeDiscount - (float) afterDiscount;
-      float discountPercentage = ((float) discountPrice/(float)beforeDiscount)* 100;
-      return (float) discountPercentage;
-      }
-  public int getDiscountedPrice(int price, float discountPercentage){
-      if(discountPercentage > 100.0f){
-          return 0;
-      }
-      float discountedPrice = (int)price - ((int)price * (float)discountPercentage/100);
-      return (int)discountedPrice;
-  }
-  public static int getOriginalPrice(int discountedPrice, float discountPercentage){
-      if(discountedPrice == 0){
-          return 0;
-      }
-      if (discountPercentage == 100){
-      return discountedPrice;
-      }
-       float originalPrice = (float)discountedPrice * 100/(float)discountPercentage;
-       return (int) originalPrice;
- }
-  public float getAdminFeePercentage(){
-      return 0.05f;
-  }
-  public int getAdminfee(int price){
-      float adminFee = (float)(int)price * getAdminFeePercentage();
-      return (int) adminFee;
-  }
-  public int getTotalPrice(int price, int numberOfNight){
-      int totalPrice = (int) price * (int) numberOfNight;
-      return (int) totalPrice;
+  public static Account createAccount(){
+      Account account = new Account("Azzah","azzah.azkiyah@ui.ac.id", "tutam");
+      return account;
   }
   
-  */
+  public static Price cekHarga(){
+      Price harga = new Price(250, 10);
+      Voucher promo = new Voucher("Deluxe",00123, Type.DISCOUNT, 100, 10);
+      return harga;
+  }
 }

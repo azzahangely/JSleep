@@ -1,25 +1,29 @@
-package AzzahJsleepFN;
+package AzzahJSleepFN;
 
 public class Price{
-    public double rebate;
+    //public double rebate;
     public double price;
-    public int discount;
+    public double discount;
     
     public Price (double price){
-        this.discount = 0;
-        this.rebate = 0;
         this.price = price;
     }
-    public Price(double price, int discount){
+        public Price (double price, double discount){
+        this.price = price;
+        this.discount = discount;
+    }
+    /*public Price(double price, int discount){
         this.price = price;
         this.discount = discount;
         this.rebate = 0;
-    }
+    
+    
     public Price (double price, double rebate){
         this.price = price;
         this.rebate = rebate;
         this.discount = 0;
     }
+    
     private double getDiscountedPrice(){
         if(discount > 100.0){
             int discount = 100;
@@ -34,9 +38,9 @@ public class Price{
     }
     private double getRebatedPrice(){
         if(rebate > price){
-           double rebate = (double) price;
+           rebate = price;
         }
  
-        return (double) price - (double) rebate;
-    }
+        return price-rebate;
+    }*/
 }

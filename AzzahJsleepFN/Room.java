@@ -1,13 +1,14 @@
-package AzzahJsleepFN;
+package AzzahJSleepFN;
 
 public class Room
-{    int size;
-     String name;
-     Facility facility;
-     Price price;
-    public Room (String name, int size, Price price, Facility facility){
+{    public int size;
+     public String name;
+     public Facility facility;
+     public Price price;
+     
+    public Room (String name, int weight, Price price, Facility facility){
         this.name = name;
-        this.size = size;
+        size = weight;
         this.price = price;
         this.facility = facility;
     }

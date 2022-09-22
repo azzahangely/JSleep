@@ -1,7 +1,11 @@
 #BlueJ class context
-comment0.target=Jsleep
+comment0.target=JSleep
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 comment2.params=
 comment2.target=Room\ createRoom()
-numComments=3
+comment3.params=
+comment3.target=Account\ createAccount()
+comment4.params=
+comment4.target=Price\ cekHarga()
+numComments=5

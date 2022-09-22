@@ -1,4 +1,4 @@
-package AzzahJsleepFN;
+package AzzahJSleepFN;
 
 public class Rating
 {
@@ -10,8 +10,14 @@ public class Rating
        this.count = 0;
    }
    public void insert(int rating){
-       this.total += (int) rating;
-       this.count++;
+       this.total = this.total + (long)rating;
+       this.count+=1;
+   }
+      public double getAverage(){
+       if(this.count == 0){
+           return 0;
+       }
+       return (double)this.total/this.count;
    }
    public long getCount(){
        return this.count;
@@ -19,7 +25,5 @@ public class Rating
    public long getTotal(){
        return this.total;
    }
-   public double getAverage(){
-       return (double)this.total/this.count;
-   }
+
 }
