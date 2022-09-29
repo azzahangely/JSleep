@@ -10,5 +10,9 @@ public class Account extends Serializable
     this.name = name;
     this.email = email;
     this.password = password;
-}
+    }
+    public String toString(){
+        return "====ACCOUNT====\n" + "Your Id Number is : " + id + 
+        "\nName : " + name + "\nEmail : " + email + "\nPassword : " + password;
+    }
 }

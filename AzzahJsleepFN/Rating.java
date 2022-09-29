@@ -25,5 +25,7 @@ public class Rating
    public long getTotal(){
        return this.total;
    }
-
+   public String toString(){
+       return "====Rating====\n" + "Total : " + total + "\nCount : " + count; 
+   }
 }
