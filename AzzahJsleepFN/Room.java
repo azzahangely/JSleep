@@ -1,6 +1,6 @@
 package AzzahJSleepFN;
 
-public class Room extends Serializable
+public class Room extends Serializable implements FileParser
 {    public int size;
      public String name;
      public Facility facility;
@@ -24,5 +24,11 @@ public class Room extends Serializable
         return "=====Room=====\n" + "Your Id Number is : " + (int)id + 
         "\nName : " + name + "\nChecking Price. . . \n" + price + "\nFacility : " + facility + "\nCity : " + city + "\nAddress : " + address;
         
+    }
+        public Object write(){
+        return 0;
+    }
+    public boolean read(String a){
+        return true;
     }
 }

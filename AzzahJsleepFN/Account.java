@@ -1,6 +1,6 @@
 package AzzahJSleepFN;
 
-public class Account extends Serializable
+public class Account extends Serializable implements FileParser
 {   public String name;
     public String email;
     public String password;
@@ -10,6 +10,12 @@ public class Account extends Serializable
     this.name = name;
     this.email = email;
     this.password = password;
+    }
+    public Object write(){
+        return 0;
+    }
+    public boolean read(String a){
+        return true;
     }
     public String toString(){
         return "====ACCOUNT====\n" + "Your Id Number is : " + id + 
