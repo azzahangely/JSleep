@@ -1,11 +1,12 @@
 package AzzahJSleepFN;
 import java.util.Calendar;
+import java.util.*;
 
 public class Invoice extends Serializable
 {
     public int buyerId;
     public int renterId;
-    public Calendar time;
+    public Date time;
     public PaymentStatus status;
     public RoomRating rating;
  
@@ -13,14 +14,17 @@ public class Invoice extends Serializable
         super(id);
         this.buyerId = buyerId;
         this.renterId = renterId;
-        Calendar time = Calendar.getInstance();
+        this.time = new Date();
         this.rating = RoomRating.NONE;
         this.status = PaymentStatus.WAITING;
     }
     public Invoice(int id, Account buyer, Renter renter){
         super(id);
         this.buyerId = buyer.id;
-        this.renterId = renter.id;   
+        this.renterId = renter.id;
+        this.time = new Date();
+        this.rating = RoomRating.NONE;
+        this.status = PaymentStatus.WAITING;
     }
     public String print(){
         return "Your Buyer Id is :" + buyerId + "\n" + "Your Renter Id is :" + 
