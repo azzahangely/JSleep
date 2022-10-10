@@ -67,7 +67,7 @@ public class Payment extends Invoice{
                     return false;
                 }
             }
-            return true;
         }
+        return true;
    }
 }

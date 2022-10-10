@@ -5,7 +5,9 @@ import java.sql.*;
 public class JSleep
 {
   public static void main(String[] args){
-      Room RoomA = JSleep.createRoom();
+      System.out.println("Hello from Intellij!");
+
+      /*Room RoomA = JSleep.createRoom();
       Room RoomB = JSleep.createRoom();
       System.out.println("Membuat booking dari tanggal 15 hingga 18");
       Date start = Date.valueOf("2022-8-15");
@@ -19,8 +21,11 @@ public class JSleep
       Date start3 = Date.valueOf("2022-8-18");
       Date end3 = Date.valueOf("2022-8-20");
       System.out.println(Payment.makeBooking(start3, end3,RoomB));
+
+       */
   }
-  
+
+  /*
   public static Room createRoom(){
       Price price = new Price(200000, 15);
       Room room = new Room(1234, "hotel", 20, price, 
