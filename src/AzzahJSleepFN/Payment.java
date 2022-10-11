@@ -16,15 +16,15 @@ public class Payment extends Invoice{
     from, Date to){
         super(id, buyerId, renterId);
         this.roomId = roomId;
-        this.from = new Date();
-        this.to = new Date();
+        this.from = from;
+        this.to = to;
     }
     public Payment(int id, Account buyer, Renter renter, int roomId, Date
     from, Date to){
         super(id, buyer.id, renter.id);
         this.roomId = roomId;
-        this.from = new Date();
-        this.to = new Date();
+        this.from = from;
+        this.to = to;
     }
     public String print(){
         return "Your room id :" + roomId;
@@ -38,7 +38,7 @@ public class Payment extends Invoice{
         return curr_time + "Formatted Date : " + curr_time; 
     }
   public static boolean makeBooking(Date from, Date to, Room room){
-        SimpleDateFormat SDFormat = new SimpleDateFormat("dd MMMM yyyy");
+        SimpleDateFormat SDFormat = new SimpleDateFormat("dd mm yyyy");
         Calendar cal = Calendar.getInstance();
         cal.setTime(from);
         String bookFrom = SDFormat.format(from.getTime());
@@ -62,8 +62,8 @@ public class Payment extends Invoice{
             return true;
         }
         else{
-            for(Date cek : room.booked){
-                if((cek.equals(from) || cek.equals(to))){
+            for(Date check : room.booked){
+                if((check.equals(from) || check.equals(to))){
                     return false;
                 }
             }

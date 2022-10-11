@@ -1,11 +1,17 @@
 package AzzahJSleepFN;
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class JSleep
 {
-  public static void main(String[] args){
-      System.out.println("Hello from Intellij!");
+  public static void main(String[] args) {
+      ArrayList<Room> RoomSerialized = new ArrayList<Room>();
+      for (int i = 0; i < 5; i++) {
+          RoomSerialized.add(i, JSleep.createRoom());
+          System.out.println(RoomSerialized.get(i).toString());
+      }
+  }
 
       /*Room RoomA = JSleep.createRoom();
       Room RoomB = JSleep.createRoom();
@@ -23,9 +29,9 @@ public class JSleep
       System.out.println(Payment.makeBooking(start3, end3,RoomB));
 
        */
-  }
 
-  /*
+
+
   public static Room createRoom(){
       Price price = new Price(200000, 15);
       Room room = new Room(1234, "hotel", 20, price, 
