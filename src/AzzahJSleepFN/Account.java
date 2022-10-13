@@ -18,7 +18,8 @@ public class Account extends Serializable implements FileParser
         return true;
     }
     public String toString(){
-        return "====ACCOUNT====\n" + "Your Id Number is : " + id + 
+        return "====ACCOUNT====\n" + "Your Id Number is : " + id +
         "\nName : " + name + "\nEmail : " + email + "\nPassword : " + password;
     }
+    //getClass().getName() + " " + id + " " + name + " " + email + " " + password;
 }

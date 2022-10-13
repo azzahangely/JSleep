@@ -15,3 +15,5 @@ public class Complaint extends Serializable
        date + "\nDescription : " + desc;
    }
 }
+//getClass().getName() + " " + id + " " + name + " " + email + " " + password;
+//GETCLASSNYA DIMANA HUHU BINGUNG
