@@ -8,11 +8,8 @@ public class Serializable
     private static HashMap<Class<?>, Integer> mapCounter;
 
     protected Serializable (int id){
-        //increment i
         this.id = id;
     }
-
-
 
     public int compareTo(Serializable serial){
         return this.id - serial.id;
