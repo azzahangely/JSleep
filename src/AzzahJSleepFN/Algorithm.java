@@ -1,242 +1,173 @@
 package AzzahJSleepFN;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.Arrays;
+import java.util.*;
 
 public class Algorithm {
     private Algorithm() {
     }
-    // ------------------------ Case Study ----------------------
-    //COUNT 1
-    public static <T> int count(Iterator<T> iterator, T value)  throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return count(iterator, (T) prd);
+
+    public static <T> int count(T[] array, T value) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return count(it, value);
     }
 
-    //COUNT 2
-    public static <T> int count(T[] T_arr, T value) throws exception
-    {
-        final Iterator<T> i = Arrays.stream(T_arr).iterator();
-        return count(i, value);
+    public static <T> int count(Iterable<T> iterable, T value) {
+        final Iterator<T> it = iterable.iterator();
+        return count(it, value);
     }
 
-    //COUNT 3
-    public static <T> int count(Iterator<T> iterator, Predicate prd) throws exception
-    {
-        int i = 0;
+    public static <T> int count(Iterator<T> iterator, T value) {
+        final Predicate<T> pred = value::equals;
+        return count(iterator, pred);
+    }
+
+    public static <T> int count(T[] array, Predicate<T> pred) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return count(it, pred);
+    }
+
+    public static <T> int count(Iterable<T> iterable, Predicate<T> pred) {
+        final Iterator<T> it = iterable.iterator();
+        return count(it, pred);
+    }
+
+    public static <T> int count(Iterator<T> iterator, Predicate<T> pred) {
+        int count = 0;
+        while (iterator.hasNext())
+            if (pred.predicate(iterator.next()))
+                ++count;
+        return count;
+    }
+
+    public static <T> T find(T[] array, T value) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return find(it, value);
+    }
+
+    public static <T> T find(Iterable<T> iterable, T value) {
+        final Iterator<T> it = iterable.iterator();
+        return find(it, value);
+    }
+
+    public static <T> T find(Iterator<T> iterator, T value) {
+        final Predicate<T> pred = value::equals;
+        return find(iterator, pred);
+    }
+
+    public static <T> T find(T[] array, Predicate<T> pred) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return find(it, pred);
+    }
+
+    public static <T> T find(Iterable<T> iterable, Predicate<T> pred) {
+        final Iterator<T> it = iterable.iterator();
+        return find(it, pred);
+    }
+
+    public static <T> T find(Iterator<T> iterator, Predicate<T> pred) {
         while (iterator.hasNext()) {
-            if (prd.test(iterator.next())) {
-                i++;
-            }
-        }
-        return i;
-    }
-
-    //COUNT 4
-    public static <T> int count(Iterable<T> iterable, Predicate prd) throws exception
-    {
-        final Iterator<T> i = iterable.iterator();
-        return count(iterable.iterator(), prd);
-    }
-
-    //COUNT 5
-    public static <T> int count(T[] T_arr, Predicate prd) throws exception
-    {
-        final Iterator<T> i = Arrays.stream(T_arr).iterator();
-        return count(i, prd);
-    }
-
-    //COUNT 6
-    public static <T> int count(Iterable<T> iterable, T value) throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return count(iterable, (T) prd);
-    }
-
-    // batas, jujur kenapa banyak banget si bang pusing banget huhuhuhu//
-
-    //Exist 1
-    public static <T> boolean exist(Iterable<T> iterable, T value)  throws exception {
-        final Iterator<T> exist = iterable.iterator();
-        return exist((Iterable<T>) exist, value);
-    }
-
-    //Exist 2
-    public static <T> boolean exist(Iterable<T> iterable, Predicate prd) throws exception {
-        final Iterator<T> exist = iterable.iterator();
-        return exist((Iterable<T>) exist, prd);
-    }
-
-    //Exist 3
-    public static <T> boolean exist(T[] T_arr, Predicate<T> prd) throws exception
-    {
-        final Iterator<T> exist = Arrays.stream(T_arr).iterator();
-        return exist((Iterable<T>) exist, prd);
-    }
-
-    //Exist 4
-    public static <T> boolean exist(T[] T_arr, T value) throws exception
-    {
-        final Iterator<T> exist = Arrays.stream(T_arr).iterator();
-        return exist((Iterable<T>) exist, value);
-    }
-
-    //Exist 5
-    public static <T> boolean exist(Iterator<T> iterator, T value)  throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return exist((Iterator<T>) iterator, (T) prd);
-    }
-
-    //Exist 6
-    public static <T> boolean exist(Iterator<T> iterator, Predicate<T> prd)  throws exception
-    {
-        while (iterator.hasNext()) {
-            if (prd.test(iterator.next())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // batas, jujur kenapa banyak banget si bang pusing banget huhuhuhu//
-
-    //Find 1 : t array sama predicate <T>
-    public static <T> T find(T[] T_arr, Predicate<T> prd)  throws exception
-    {
-        final Iterator<T> find = Arrays.stream(T_arr).iterator();
-        return find((Iterator<T>) find, prd);
-    }
-
-    //Find 2 iterable sama predicate
-    public static <T> T find(Iterable<T> iterable, Predicate<T> prd)  throws exception
-    {
-        final Iterator<T> find = iterable.iterator();
-        return find((Iterable<T>) find, prd);
-    }
-
-    //Find 3 : t array sama value
-    public static <T> T find(T[] T_arr, T value)  throws exception
-    {
-        final Iterator<T> find = Arrays.stream(T_arr).iterator();
-        return find((Iterator<T>) find, value);
-    }
-
-    //Find 4 : iterable sama value
-    public static <T> T find(Iterable<T> iterable, T value)  throws exception
-    {
-        final Iterator<T> find = iterable.iterator();
-        return find((Iterable<T>) find, value);
-    }
-
-    //Find 5 : iterator sama t value
-    public static <T> T find(Iterator<T> iterator, T value)  throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return find((Iterator<T>) iterator, (T) prd);
-    }
-
-    //Find 6 : iterator sama predicate
-    public static <T> T find(Iterator<T> iterator, Predicate<T> prd)  throws exception
-    {
-        while (iterator.hasNext()) {
-            final T t_var = iterator.next();
-            if (prd.test(t_var)) {
-                return t_var;
-            }
+            T current = iterator.next();
+            if (pred.predicate(current))
+                return current;
         }
         return null;
     }
 
-    // ------------------------ Post Test  ----------------------
-    // nambah collect (6) dan paginate (3) isi nya ngikutin cs aja bismillah ya bang
-
-    //Collect 1 : iterable sama T value
-    public static <T> List collect(Iterable<T> iterable, T value) throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return collect((Iterable<T>) iterable, (T) prd);
+    public static <T> boolean exists(T[] array, T value) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return exists(it, value);
     }
 
-    //Collect 2 : iterable sama predicate
-    public static <T> List collect(Iterable<T> iterable, Predicate<T> prd) throws exception
-    {
-        final Iterator<T> collect = iterable.iterator();
-        return collect((Iterable<T>) collect, prd);
+    public static <T> boolean exists(Iterable<T> iterable, T value) {
+        final Iterator<T> it = iterable.iterator();
+        return exists(it, value);
     }
 
-    //Collect 3 : T array sama T value
-    public static <T> List collect(T[] T_arr, T value)  throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return collect((T[]) T_arr, (T) prd);
+    public static <T> boolean exists(Iterator<T> iterator, T value) {
+        final Predicate<T> pred = value::equals;
+        return exists(iterator, pred);
     }
 
-    //Collect 4 : Iterator sama T value
-    public static <T> List collect(Iterator<T> iterator, T value)  throws exception
-    {
-        final Predicate<T> prd = value::equals;
-        return collect((Iterator<T>) iterator, (T) prd);
+    public static <T> boolean exists(T[] array, Predicate<T> pred) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return exists(it, pred);
     }
 
-    //Collect 5 : T array sama predicate
-    public static <T> List collect(T[] T_arr, Predicate<T> prd) throws exception
-    {
-        final Iterator<T> collect = Arrays.stream(T_arr).iterator();
-        return collect((Iterator<T>) collect, prd);
+    public static <T> boolean exists(Iterable<T> iterable, Predicate<T> pred) {
+        final Iterator<T> it = iterable.iterator();
+        return exists(it, pred);
     }
 
-    //Collect 6 : Iterator sama predicate
-    public static <T> List collect(Iterator<T> iterator, Predicate<T> prd) throws exception
-    {
-        final List<T> list = new ArrayList<>();
+    public static <T> boolean exists(Iterator<T> iterator, Predicate<T> pred) {
         while (iterator.hasNext()) {
-            final T t_var = iterator.next();
-            if (prd.test(t_var)) {
-                list.add(t_var);
-            }
+            T current = iterator.next();
+            if (pred.predicate(current))
+                return true;
+        }
+        return false;
+    }
+
+    public static <T> List<T> collect(T[] array, T value) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return collect(it, value);
+    }
+
+    public static <T> List<T> collect(Iterable<T> iterable, T value) {
+        final Iterator<T> it = iterable.iterator();
+        return collect(it, value);
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, T value) {
+        final Predicate<T> pred = value::equals;
+        return collect(iterator, pred);
+    }
+
+    public static <T> List<T> collect(T[] array, Predicate<T> pred) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return collect(it, pred);
+    }
+
+    public static <T> List<T> collect(Iterable<T> iterable, Predicate<T> pred) {
+        final Iterator<T> it = iterable.iterator();
+        return collect(it, pred);
+    }
+
+    public static <T> List<T> collect(Iterator<T> iterator, Predicate<T> pred) {
+        ArrayList<T> list = new ArrayList<>();
+        while (iterator.hasNext()) {
+            T current = iterator.next();
+            if (pred.predicate(current))
+                list.add(current);
         }
         return list;
     }
 
-    // batas, jujur kenapa banyak banget si bang pusing banget huhuhuhu//
-
-    //Paginate 1 : T array, int, int, predicate
-    public static <T> List paginate(T[] T_arr, int page, int pageSize, Predicate<T> prd) throws exception
-    {
-        final Iterator<T> paginate = Arrays.stream(T_arr).iterator();
-        return paginate((Iterator<T>) paginate, page, pageSize, prd);
+    public static <T> List<T> paginate(T[] array, int page, int pageSize, Predicate<T> pred) {
+        final Iterator<T> it = Arrays.stream(array).iterator();
+        return paginate(it, page, pageSize, pred);
     }
 
-    //Paginate 2 : Iterator, int, int, predicate
-    public static <T> List paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> prd)  throws exception
-    {
-        final List<T> list = new ArrayList<>();
-        while (iterator.hasNext()) {
-            final T t_var = iterator.next();
-            if (prd.test(t_var)) {
-                list.add(t_var);
-            }
+    public static <T> List<T> paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> pred) {
+        final Iterator<T> it = iterable.iterator();
+        return paginate(it, page, pageSize, pred);
+    }
+
+    public static <T> List<T> paginate(Iterator<T> iterator, int page, int pageSize, Predicate<T> pred) {
+        int occurences = 0;
+        int startingIdx = page * pageSize;
+        List<T> pageList = new ArrayList<>(pageSize);
+        // skip first occurrences of element
+        while (iterator.hasNext() && occurences < startingIdx) {
+            T obj = iterator.next();
+            if (pred.predicate(obj))
+                ++occurences;
         }
-        return list;
-    }
-
-    //Paginate 3 : Iterable, int, int, predicate
-    public static <T> List paginate(Iterable<T> iterable, int page, int pageSize, Predicate<T> prd)  throws exception
-    {
-        final Iterator<T> paginate = iterable.iterator();
-        return paginate((Iterable<T>) paginate, page, pageSize, prd);
-    }
-
-    //biar gak recursing infinitely kata stackoverflow gini
-    private static class exception extends Throwable
-    {
-        public exception(String not_implemented) {
+        // get the next occurrences of element
+        while (iterator.hasNext() && pageList.size() < pageSize) {
+            T obj = iterator.next();
+            if (pred.predicate(obj))
+                pageList.add(obj);
         }
+        return pageList;
     }
 }
-

@@ -9,13 +9,30 @@ import com.google.gson.*;
 
 
 public class JSleep {
-    class Country {
-        public String name;
-        public int population;
-        public List<String> listOfStates;
-    }
+   class Country {
+       public String name;
+       public int population;
+       public List<String> listOfStates;
+   }
+
 
     public static void main(String[] args) {
+
+       Renter testRegex = new Renter("Netlab_", "081234567890", "Jl Jalan");
+       Renter testRegexFail = new Renter("netlab", "081", "Jalan");
+        System.out.println(testRegex.validate());
+        System.out.println(testRegexFail.validate());
+
+        try {
+            String filepath = "C:\\Users\\HP 15s\\OOP\\Jsleep\\src\\json\\randomRoomList.json";
+            JsonTable<Room> tableRoom = new JsonTable<>(Room.class, filepath);
+            List<Room> filterTableRoom = filterByCity(tableRoom, "medan", 0, 5);
+            filterTableRoom.forEach(room -> System.out.println(room.toString()));
+        }
+        catch (Throwable t){
+            t.printStackTrace();
+        }
+       /*
         String filepath= "C:\\Users\\HP 15s\\OOP\\Jsleep\\city.json";
         Gson gson = new Gson();
         try {
@@ -29,6 +46,26 @@ public class JSleep {
             e.printStackTrace();
         }
 
+        */
+    }
+
+    public static Room createRoom(){
+       Price price = new Price(10000.0, 10);
+       Room room = new Room(2, "Restaurant", 35, price, Facility.AC, City.BALI, "Jl. jalan");
+       return room;
+    }
+
+    public static List<Room> filterByAccountId(List<Room> list, int accountId, int page, int pageSize){
+
+        return Algorithm.<Room>paginate(list,page,pageSize,room -> room.accountId == accountId);
+    }
+
+    public static List<Room> filterByPrice(List<Room> list, double minPrice, double maxPrice){
+        return Algorithm.<Room>collect(list,room -> room.price.price >= minPrice && room.price.price <= maxPrice);
+    }
+
+    public static List<Room> filterByCity(List<Room> list, String search, int page, int pageSize){
+        return Algorithm.paginate(list, page, pageSize, room -> room.city.toString().toLowerCase().contains(search.toLowerCase()));
     }
 }
     /* comment dulu

@@ -1,7 +1,7 @@
 package AzzahJSleepFN;
 
 
-public class Voucher extends Serializable implements FileParser
+public class Voucher extends Serializable
 {
    public Type type;
    public double cut;
@@ -11,7 +11,7 @@ public class Voucher extends Serializable implements FileParser
    private boolean used;
    
    public Voucher(int id, String name, int code, Type type, boolean used, double minimum, double cut){
-       super(id);
+       super();
        this.used = used;
        this.type = type;
        this.cut = cut;

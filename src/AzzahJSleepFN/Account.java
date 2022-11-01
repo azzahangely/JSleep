@@ -1,12 +1,12 @@
 package AzzahJSleepFN;
 
-public class Account extends Serializable implements FileParser
+public class Account extends Serializable
 {   public String name;
     public String email;
     public String password;
     
     public Account(int id, String name, String email, String password){
-    super(id);
+    super();
     this.name = name;
     this.email = email;
     this.password = password;

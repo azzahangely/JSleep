@@ -2,38 +2,38 @@ package AzzahJSleepFN;
 
 import java.util.HashMap;
 
-public class Serializable
-{
+public class Serializable {
     public final int id;
-    private static HashMap<Class<?>, Integer> mapCounter;
+    private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
 
-    protected Serializable (int id){
-        this.id = id;
-    }
-
-    public int compareTo(Serializable serial){
-        return this.id - serial.id;
-    }
-
-
-    public boolean equals(Object object){
-        if(object instanceof Serializable){
-            return this.id == ((Serializable)object).id;
+    protected Serializable() {
+        Integer counter = mapCounter.get(getClass());
+        if (counter == null){
+            counter =  0;
         }
-        return false;
+        else{
+            counter +=1;
+        }
+        mapCounter.put(getClass(), counter);
+        this.id = counter;
     }
 
+    public static <T extends Serializable> Integer setClosingId(Class<T> clazz, int id) { return mapCounter.put(clazz, id); }
 
-    public boolean equals(Serializable serial) {
-        return this.id == serial.id;
+    public static <T extends Serializable> Integer getClosingId(Class<T> clazz) { return mapCounter.get(clazz); }
+
+    public boolean equals(Object other)
+    {
+        return other instanceof Serializable && ((Serializable) other).id == id;
     }
 
-
-    public <T> Integer getClosingId(Class<T> class_srl){
-        return mapCounter.get(class_srl);
+    public boolean equals(Serializable other)
+    {
+        return other.id == id;
     }
 
-    public <T> Integer getClosingId(Class<T> kelas, int id){
-        return mapCounter.put(kelas, id);
+    public int compareTo(Serializable other)
+    {
+        return Integer.compare(this.id, other.id);
     }
 }

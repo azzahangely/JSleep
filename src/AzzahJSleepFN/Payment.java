@@ -1,73 +1,80 @@
 package AzzahJSleepFN;
-import java.util.Calendar;
+
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-public class Payment extends Invoice{
-    
+public class Payment extends Invoice {
+
     private int roomId;
     public Date from;
     public Date to;
-    
-    SimpleDateFormat SDFormat = new SimpleDateFormat("Formatted Date : dd MM yyy");
-    
-    public Payment(int id, int buyerId, int renterId, int roomId, Date
-    from, Date to){
-        super(id, buyerId, renterId);
+
+
+
+    public Payment(int id, int buyerId, int renterId, int roomId, Date from, Date to) {
+        super(id,  buyerId, renterId);
         this.roomId = roomId;
         this.from = from;
         this.to = to;
     }
-    public Payment(int id, Account buyer, Renter renter, int roomId, Date
-    from, Date to){
-        super(id, buyer.id, renter.id);
+
+    public Payment(int id, Account buyer, Renter renter, int roomId, Date from, Date to) {
+        super(id, buyer, renter);
         this.roomId = roomId;
         this.from = from;
         this.to = to;
     }
-    public String print(){
-        return "Your room id :" + roomId;
-    }
-    public int getRoomId(){
+
+    public int getRoomId() {
         return roomId;
     }
-    public String getTime(){
-        SimpleDateFormat SDFormat = new SimpleDateFormat("Formatted Date : dd MM yyy");
-        String curr_time = SDFormat.format(this.time.getTime());
-        return curr_time + "Formatted Date : " + curr_time; 
-    }
-  public static boolean makeBooking(Date from, Date to, Room room){
-        SimpleDateFormat SDFormat = new SimpleDateFormat("dd mm yyyy");
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(from);
-        String bookFrom = SDFormat.format(from.getTime());
-        String bookTo = SDFormat.format(to.getTime());
+
+    public static boolean makeBooking(Date from,Date to,Room room){
         if(availability(from, to, room)){
-            while(from.before(to)){
-                room.booked.add(from);
-                cal.setTime(from);
-                cal.add(Calendar.DATE, 1);
-                from = cal.getTime();
+            Calendar start = Calendar.getInstance();
+            start.setTime(from);
+            Calendar end = Calendar.getInstance();
+            end.setTime(to);
+            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                room.booked.add(date);
             }
             return true;
-        } else {
+        }
+        return false;
+    }
+
+    public static boolean availability(Date from,Date to,Room room){
+        Calendar start = Calendar.getInstance();
+        start.setTime(from);
+        Calendar end = Calendar.getInstance();
+        end.setTime(to);
+        if(start.after(end) || start.equals(end)){
             return false;
         }
-     }
-    
-    public static boolean availability(Date from, Date to, Room room){
-        if(room.booked.isEmpty())
-        {
-            return true;
-        }
-        else{
-            for(Date check : room.booked){
-                if((check.equals(from) || check.equals(to))){
-                    return false;
-                }
+        for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+            if(room.booked.contains(date)){
+                return false;
             }
         }
         return true;
-   }
+    }
+
+    public String getTime(){
+        SimpleDateFormat SDFormat = new SimpleDateFormat("'Formatted Date' = dd MMMM yyyy");
+        String currTime = SDFormat.format(time.getTime());
+        return currTime;
+    }
+
+    @Override
+    public String print(){
+        return "Payment{" +
+                "roomId=" + roomId +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                '}';
+    }
+
 }

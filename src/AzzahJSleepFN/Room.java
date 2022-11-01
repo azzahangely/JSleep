@@ -3,19 +3,23 @@ import java.util.Date;
 import java.util.ArrayList;
 
 
-public class Room extends Serializable implements FileParser
-{    public int size;
-     public String name;
-     public Facility facility;
-     public Price price;
-     public City city;
-     public BedType bedType;
-     public String address;
-     public ArrayList<Date> booked;
-     
-    public Room (int id, String name, int size, Price price, 
-    Facility facility, City city, String address){
-        super(id);
+public class Room extends Serializable
+{
+    public BedType bedType;
+    public int accountId;
+    public Facility facility;
+    public City city;
+    public int size;
+    public String name;
+    public ArrayList<Date> booked;
+    public String address;
+    public Price price;
+
+
+    public Room(int accountId, String name, int size, Price price, Facility facility,
+                City city, String address){
+
+        this.accountId = accountId;
         this.name = name;
         this.size = size;
         this.price = price;

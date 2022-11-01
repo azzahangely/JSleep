@@ -1,10 +1,6 @@
 package AzzahJSleepFN;
 
-@FunctionalInterface
-
-public interface Predicate {
-    public boolean predicate();
+public interface Predicate<T> {
+    public abstract boolean predicate(T arg);
 }
-
-
 
