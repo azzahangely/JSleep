@@ -18,6 +18,26 @@ public class JSleep {
 
     public static void main(String[] args) {
 
+        try {
+            String filepath = "C:\\Users\\HP 15s\\OOP\\Jsleep\\src\\json\\account.json";
+            JsonTable <Account> tableAccount = new JsonTable<>(Account.class, filepath);
+            tableAccount.add(new Account("name", "email", "password"));
+            tableAccount.writeJson();
+        }
+        catch (Throwable t){
+            t.printStackTrace();
+        }
+
+        for(int i = 0; i < 10; i++){
+            ThreadingObject thread = new ThreadingObject("Thread " + i);
+        }
+
+        Account testRegex = new Account("Azzah", "netlab@gmail.com", "neTlab100");
+        Account testRegexFail =new Account("Azzah","netl-ab@gmail.com", "netlab100");
+        System.out.println(testRegex.validate());
+        System.out.println(testRegexFail.validate());
+
+        /*
        Renter testRegex = new Renter("Netlab_", "081234567890", "Jl Jalan");
        Renter testRegexFail = new Renter("netlab", "081", "Jalan");
         System.out.println(testRegex.validate());
@@ -32,7 +52,7 @@ public class JSleep {
         catch (Throwable t){
             t.printStackTrace();
         }
-       /*
+
         String filepath= "C:\\Users\\HP 15s\\OOP\\Jsleep\\city.json";
         Gson gson = new Gson();
         try {
@@ -47,6 +67,7 @@ public class JSleep {
         }
 
         */
+
     }
 
     public static Room createRoom(){
