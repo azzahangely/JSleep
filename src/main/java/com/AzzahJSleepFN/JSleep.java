@@ -5,10 +5,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+
+import com.AzzahJSleepFN.dbjson.JsonDBEngine;
 import com.google.gson.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import com.AzzahJSleepFN.dbjson.JsonTable;
 
 
 public class JSleep {
@@ -23,6 +25,8 @@ public class JSleep {
 
     public static void main(String[] args) {
         SpringApplication.run(JSleep.class, args);
+        JsonDBEngine.Run(JSleep.class);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> JsonDBEngine.join()));
 
         try {
             String filepath = "C:\\Users\\HP 15s\\OOP\\Jsleep\\src\\json\\account.json";

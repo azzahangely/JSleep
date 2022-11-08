@@ -1,4 +1,4 @@
-package com.AzzahJSleepFN;
+package com.AzzahJSleepFN.dbjson;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

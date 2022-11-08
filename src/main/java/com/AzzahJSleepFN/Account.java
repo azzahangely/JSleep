@@ -1,26 +1,12 @@
 package com.AzzahJSleepFN;
+import com.AzzahJSleepFN.dbjson.Serializable;
 
-public class Account extends Serializable
-{   public String name;
+public class Account extends Serializable{
+    public String name;
     public String email;
     public String password;
-
-    //POST TEST
-    /*REGEX FOR EMAIL :
-    -alphabets and numbers only
-    -must have "@"
-    -domain name should be .com or any other type of domain name
-    -no special characters on gmail name and no numbers on domain name
-
-    REGEX FOR PASSWORD :
-    -must have at least 1 uppercase letter
-    -must have at least 1 lowercase letter
-    -must have at least 1 number
-    -no special characters allowed
-    -no whitespace allowed
-    -min length 8
-    */
-
+    public double balance;
+    public Renter renter;
     public final static String REGEX_EMAIL = "^[A-Za-z0-9]+@(.+)$";
     public final static String REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
 

@@ -1,6 +1,8 @@
 package com.AzzahJSleepFN;
 
 
+import com.AzzahJSleepFN.dbjson.Serializable;
+
 public class Renter extends Serializable
 {
     public final static String REGEX_NAME ="^[A-Z][A-Za-z0-9_]{4,20}$";
