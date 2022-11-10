@@ -1,24 +1,28 @@
 package com.AzzahJSleepFN;
+import com.AzzahJSleepFN.*;
 import  com.AzzahJSleepFN.Account;
-import com.AzzahJSleepFN.Payment;
 import com.AzzahJSleepFN.controller.BasicGetController;
-import com.AzzahJSleepFN.dbjson.JsonTable;
-import com.AzzahJSleepFN.dbjson.Serializable;
+import com.AzzahJSleepFN.dbjson.*;
 import com.AzzahJSleepFN.dbjson.JsonAutowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.AzzahJSleepFN.controller.BasicGetController;
-import com.AzzahJSleepFN.PaymentController;
-import com.AzzahJSleepFN.controller.BasicGetController;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
+
+@RestController
 @RequestMapping("/payment")
-public class PaymentController extends BasicGetController<Payment>{
-    //@JsonAutowired(Account.class, "C:\Users\HP 15s\OOP\Jsleep\src\main\java\com\AzzahJSleepFN\dbjson\JsonAutowired.java";
+public class PaymentController implements BasicGetController<Payment>{
+    @JsonAutowired(value = Account.class, filepath = "account.json")
+    public static JsonTable<Payment> paymentTable;
+
     @Override
     public JsonTable<Payment> getJsonTable() {
-        return null;
+        return paymentTable;
     }
+
     @PostMapping("/{create}")
     public Payment create(
             @RequestParam int buyerId,
@@ -30,15 +34,21 @@ public class PaymentController extends BasicGetController<Payment>{
         return null;
     }
     @PostMapping("/{accept}")
-    public Payment accept (){
-        return null;
+    public boolean accept (
+            @RequestParam int id
+    ){
+        return false;
     }
     @PostMapping("/{cancel}")
-    public Payment cancel (){
-        return null;
+    public boolean cancel (
+            @RequestParam int id
+    ){
+        return false;
     }
     @PostMapping("/{submit}")
-    public Payment submit (){
-        return null;
+    public boolean submit (
+            @RequestParam int id
+    ){
+        return false;
     }
 }

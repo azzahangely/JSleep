@@ -1,29 +1,39 @@
 package com.AzzahJSleepFN.controller;
 
 import com.AzzahJSleepFN.Account;
+import com.AzzahJSleepFN.Algorithm;
 import com.AzzahJSleepFN.Renter;
 import com.AzzahJSleepFN.dbjson.JsonAutowired;
 import com.AzzahJSleepFN.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 @RestController
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account>
 {
-    public static final String REGEX_PASSWORD = "Syahwa2503";
-    @JsonAutowired(value = Account.class, filepath = "Account.json")
-    private JsonTable<Account> jsonTable;
+    public final static String REGEX_PASSWORD = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$";
+    @JsonAutowired(value = Account.class, filepath = "C:\\Users\\HP 15s\\OOP\\Jsleep\\src\\main\\java\\com\\AzzahJSleepFN\\json\\account.json")
     public static JsonTable<Account> accountTable;
-    public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$");
-    public static final String REGEX_EMAIL = "azzahangely@gmail.com";
-    public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile("^[A-Za-z0-9]+@(.+)$");
+    public final static Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
+    public final static String REGEX_EMAIL = "^[A-Za-z0-9]+@(.+)$";
+    public final static Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
 
+    public JsonTable<Account> getJsonTable(){
+
+        return accountTable;
+    }
 
     @GetMapping
     String index() { return "account page"; }
-
     @PostMapping("/register")
     Account register
             (
@@ -32,28 +42,52 @@ public class AccountController implements BasicGetController<Account>
                     @RequestParam String password
             )
     {
+        Matcher matcher = REGEX_PATTERN_EMAIL.matcher(email);
+        if (!matcher.matches())
+        {
+            return null;
+        }
+        matcher = REGEX_PATTERN_PASSWORD.matcher(password);
+        if (!matcher.matches())
+        {
+            return null;
+        }
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest();
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashedpass = no.toString(16);
+            while (hashedpass.length() < 32) {
+                hashedpass = "0" + hashedpass;
+            }
+            password = hashedpass;
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException(e);
+        }
+
+        Account account = new Account(name, email, password);
+        accountTable.add(new Account(name, email, password));
         return new Account(name, email, password);
     }
-    @GetMapping("/{id}")
-    public Account getById(@PathVariable int id) {
-        return "account id " + id + " not found!";
-    }
-
-    public AccountController(){
-        accountTable = new JsonTable<Account>(Account.class, "Account.json");
-    }
-
-    public JsonTable<Account> getJsonTable(){
-        return accountTable;
-    }
-
+    @PostMapping("/{id}/registerRenter")
     Renter registerRenter(
             @PathVariable int id,
             @RequestParam String username,
             @RequestParam String address,
             @RequestParam String phoneNumber
     ){
-        return new Renter(username, address, phoneNumber);
+        Account account = Algorithm.<Account>find(accountTable, pred -> pred.id == id);
+        if (account == null)
+        {
+            return null;
+        }
+        else{
+            Renter renter = new Renter(username, address, phoneNumber);
+            account.renter = renter;
+            return renter;
+        }
     }
     @PostMapping("/login")
     Account login(
@@ -61,10 +95,38 @@ public class AccountController implements BasicGetController<Account>
             @RequestParam String password
     )
     {
-        return new Account(email, password);
+        String hashedpass = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(password.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hasedpass = no.toString(16);
+            while (hasedpass.length() < 32) {
+                hasedpass = "0" + hasedpass;
+            }
+        }
+        catch (NoSuchAlgorithmException e)
+        {
+            throw new RuntimeException(e);
+        }
+        String finalHashedpass = hashedpass;
+        Account account = Algorithm.<Account>find(accountTable, pred -> pred.email.equals(pred.email) && pred.password.equals(hashedpass));
+        return account;
     }
 
-    boolean topUp(@PathVariable int id, @RequestParam double balance){
-        return true;
+    @PostMapping("/{id}/topUp")
+    boolean topUp(
+            @PathVariable int id,
+            @RequestParam double balance
+    ){
+        Account account = Algorithm.<Account>find(accountTable, acc -> id == acc.id);
+        if (account == null)
+        {
+            return false;
+        }
+        else{
+            account.balance += balance;
+            return true;
+        }
     }
 }

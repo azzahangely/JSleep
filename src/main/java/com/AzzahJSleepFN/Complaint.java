@@ -1,5 +1,6 @@
 package com.AzzahJSleepFN;
 
+import com.AzzahJSleepFN.dbjson.Serializable;
 public class Complaint extends Serializable
 {
     public String desc;

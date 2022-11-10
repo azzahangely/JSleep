@@ -1,4 +1,6 @@
 package com.AzzahJSleepFN;
+import com.AzzahJSleepFN.dbjson.Serializable;
+
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -29,8 +31,7 @@ public class Room extends Serializable
         this.bedType = BedType.SINGLE;
     }
     public String toString(){
-        return "=====Room=====\n" + "Your Id Number is : " + (int)id + 
-        "\nName : " + name + "\nChecking Price. . . \n" + price + "\nFacility : " + facility + "\nCity : " + city + "\nAddress : " + address;
+        return "=====Room=====\n" + "\nName : " + name + "\nChecking Price. . . \n" + price + "\nFacility : " + facility + "\nCity : " + city + "\nAddress : " + address;
         
     }
         public Object write(){

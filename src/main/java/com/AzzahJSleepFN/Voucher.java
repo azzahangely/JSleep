@@ -1,6 +1,8 @@
 package com.AzzahJSleepFN;
 
 
+import com.AzzahJSleepFN.dbjson.Serializable;
+
 public class Voucher extends Serializable
 {
    public Type type;
@@ -19,7 +21,7 @@ public class Voucher extends Serializable
        this.code = code;
        this.minimum = minimum;
    }
-   public boolean canApply(Price price){
+   public boolean canApply(double price){
       
       if( price.price > minimum && this.used == false){
           return true;
