@@ -1,5 +1,6 @@
-package com.AzzahJSleepFN;
+package com.AzzahJSleepFN.controller;
 
+import com.AzzahJSleepFN.*;
 import com.AzzahJSleepFN.controller.BasicGetController;
 import com.AzzahJSleepFN.dbjson.*;
 import org.springframework.web.bind.annotation.*;
@@ -7,10 +8,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/voucher")
+
 public class VoucherController implements BasicGetController<Voucher> {
     @JsonAutowired(value = Voucher.class, filepath = "C:\\Users\\HP 15s\\OOP\\Jsleep\\src\\main\\java\\com\\AzzahJSleepFN\\json\\voucher.json")
-    public static JsonTable<Voucher> voucherTable;
 
+    public static JsonTable<Voucher> voucherTable;
     @Override
     public JsonTable<Voucher> getJsonTable() {
         return voucherTable;
@@ -23,7 +25,10 @@ public class VoucherController implements BasicGetController<Voucher> {
     }
 
     @GetMapping("/getAvailable ")
-    List<Voucher> getAvailable(@RequestParam int page, @RequestParam int size) {
+    List<Voucher> getAvailable(
+            @RequestParam int page,
+            @RequestParam int size)
+    {
         return Algorithm.<Voucher>paginate(voucherTable, page, size, pred -> !pred.isUsed());
     }
 
